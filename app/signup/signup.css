@@ -4,14 +4,14 @@
   color: #ffffff;
 }
 
-/* RESET */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: radial-gradient(circle at top left, #1f1f3a, #0f0f23 60%);
@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
 }
 
-/* WRAPPER */
+
 .signup-wrapper {
   min-height: 100vh;
   display: flex;
@@ -28,14 +28,14 @@ body {
   padding: 20px;
 }
 
-/* CONTAINER */
+
 .signup-container {
   width: 100%;
   max-width: 420px;
   position: relative;
 }
 
-/* BACKGROUND GLOW */
+
 .signup-container::before {
   content: "";
   position: absolute;
@@ -49,7 +49,6 @@ body {
   z-index: -1;
 }
 
-/* CARD */
 .signup-card {
   background: rgba(18, 18, 35, 0.85);
   backdrop-filter: blur(30px);
@@ -69,7 +68,7 @@ body {
   transform: translateY(-4px);
 }
 
-/* TITLE */
+
 .signup-card h2 {
   text-align: center;
   font-size: 24px;
@@ -85,18 +84,18 @@ body {
   margin-bottom: 28px;
 }
 
-/* FORM */
+
 form {
   display: flex;
   flex-direction: column;
 }
 
-/* INPUT GROUP */
+
 .form-group {
   margin-bottom: 18px;
 }
 
-/* INPUT */
+
 .form-group input {
   width: 100%;
   height: 52px;
@@ -117,7 +116,7 @@ form {
   color: rgba(255,255,255,0.45);
 }
 
-/* FOCUS */
+
 .form-group input:focus {
   border-color: #7c8cff;
 
@@ -128,7 +127,7 @@ form {
   background: rgba(255,255,255,0.08);
 }
 
-/* ERROR */
+
 .error-text {
   display: block;
   font-size: 12px;
@@ -136,7 +135,7 @@ form {
   margin-top: 6px;
 }
 
-/* BUTTON */
+
 button {
   width: 100%;
   height: 52px;
@@ -170,7 +169,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* LOGIN LINK */
 .login-link {
   text-align: center;
   margin-top: 20px;
@@ -188,7 +186,7 @@ button:disabled {
   text-decoration: underline;
 }
 
-/* RESPONSIVE */
+
 @media (max-width: 480px) {
   .signup-card {
     padding: 40px 24px;

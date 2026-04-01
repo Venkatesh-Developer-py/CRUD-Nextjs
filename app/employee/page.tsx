@@ -214,7 +214,6 @@ export default function EmployeePage() {
       </div>
     </div>
     
-    {/* Row 3: Designation + Salary */}
     <select
       value={Employe_designation}
       onChange={(e) => setEmployeDesignation(e.target.value)}
@@ -243,7 +242,7 @@ export default function EmployeePage() {
       required
     />
     
-    {/* Row 4: Phone (Full Width) */}
+    
     <div className="form-group full-width">
       <input
         type="tel"

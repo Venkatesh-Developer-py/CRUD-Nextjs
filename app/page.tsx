@@ -158,6 +158,7 @@ useEffect(() => {
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                   disabled={isLoading}
+                  required
                 />
                 <span className="checkmark"></span>
                 Remember me
