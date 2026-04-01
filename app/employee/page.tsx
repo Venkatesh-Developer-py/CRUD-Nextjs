@@ -28,7 +28,7 @@ export default function EmployeePage() {
   const [Employe_number, setEmployeNumber] = useState("")
   const [editId, setEditId] = useState<number | null>(null)
 
-  // ✅ Pagination states
+ 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
 
@@ -56,9 +56,9 @@ export default function EmployeePage() {
       return alert("Fill all fields")
     }
 
-    if (Employe_number.length !== 10) {
-      return alert("Mobile number must be 10 digits")
-    }
+   if (Employe_number.length !== 10) {
+      return alert("Enter valid 10 digit number")
+  }
 
     const payload = {
       Employe_name,
@@ -117,7 +117,7 @@ export default function EmployeePage() {
     item.Employe_name.toLowerCase().includes(search.toLowerCase())
   )
 
-  // ✅ Pagination logic
+  
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
@@ -141,7 +141,7 @@ export default function EmployeePage() {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value)
-              setCurrentPage(1) // ✅ reset page
+              setCurrentPage(1) 
             }}
           />
 
@@ -162,7 +162,7 @@ export default function EmployeePage() {
   <h2>{editId ? "Update Employee Details" : "Add New Employee"}</h2>
   
   <div className="form-grid">
-    {/* Row 1: Name + Age */}
+   
     <input
       placeholder="Full Name *"
       value={Employe_name}
@@ -185,13 +185,13 @@ export default function EmployeePage() {
       required
     />
     
-    {/* Row 2: Gender (Full Width) */}
+    
     <div className="form-group full-width">
       <div className="radio-group">
         <label className="radio-option">
           <input
             type="radio"
-            name="gender" // ✅ Fixed: Add name attribute for proper radio behavior
+            name="gender" 
             value="Male"
             checked={Employe_gender === "Male"}
             onChange={(e) => setEmployeGender(e.target.value)}
@@ -203,7 +203,7 @@ export default function EmployeePage() {
         <label className="radio-option">
           <input
             type="radio"
-            name="gender" // ✅ Fixed: Same name for group
+            name="gender" 
             value="Female"
             checked={Employe_gender === "Female"}
             onChange={(e) => setEmployeGender(e.target.value)}

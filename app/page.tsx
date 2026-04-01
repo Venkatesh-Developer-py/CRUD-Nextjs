@@ -52,7 +52,7 @@ export default function LoginPage() {
 useEffect(() => {
   const isLoggedIn = localStorage.getItem("isLoggedIn")
 
-  // only redirect if user manually logged in before
+ 
   if (isLoggedIn === "true" && sessionStorage.getItem("justLoggedIn")) {
     sessionStorage.removeItem("justLoggedIn")
     window.location.href = "/employee"
@@ -78,9 +78,10 @@ useEffect(() => {
 
         localStorage.setItem("isLoggedIn", "true")
         localStorage.setItem("userEmail", email)
-        if (rememberMe) {
-          localStorage.setItem("rememberMe", email)
-        }
+        if (!rememberMe) {setError("Please check 'Remember me'")
+        setIsLoading(false)
+        return
+}
         window.location.href = "/employee"
       } catch (err: any) {
         setError(err.message)
