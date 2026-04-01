@@ -49,12 +49,15 @@ export default function LoginPage() {
   const [error, setError] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn")
-    if (isLoggedIn === "true") {
-      window.location.href = "/employee"
-    }
-  }, [router])
+useEffect(() => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn")
+
+  // only redirect if user manually logged in before
+  if (isLoggedIn === "true" && sessionStorage.getItem("justLoggedIn")) {
+    sessionStorage.removeItem("justLoggedIn")
+    window.location.href = "/employee"
+  }
+}, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
