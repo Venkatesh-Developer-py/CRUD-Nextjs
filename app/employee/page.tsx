@@ -32,7 +32,7 @@ export default function EmployeePage() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
 
-  const API_URL = "http://127.0.0.1:8000/api/backend"
+  const API_URL = "https://django-nextjs-backend-m93z.onrender.com/api/backend"
 
   const fetchDetails = async () => {
     const response = await fetch(`${API_URL}/`)
