@@ -17,6 +17,8 @@ interface Employe_Details {
 export default function EmployeePage() {
   const router = useRouter()
 
+  const [loading, setLoading] = useState(false)
+
   const [Details, setDetails] = useState<Employe_Details[]>([])
   const [search, setSearch] = useState("")
 
@@ -35,11 +37,15 @@ export default function EmployeePage() {
   const API_URL = "https://django-nextjs-backend-m93z.onrender.com/api/backend"
   console.log("API URL:", API_URL)
 
-  const fetchDetails = async () => {
+const fetchDetails = async () => {
+  try {
     const response = await fetch(`${API_URL}/`)
     const data = await response.json()
     setDetails(data)
+  } catch {
+    return alert("Server waking up...")
   }
+}
 
   useEffect(() => {
     fetchDetails()
@@ -52,24 +58,27 @@ export default function EmployeePage() {
     }
   }, [])
 
-  const handleButton = async () => {
-    if (!Employe_name || !Employe_age || !Employe_gender || !Employe_designation || !Employe_salary || !Employe_number) {
-      return alert("Fill all fields")
-    }
-
-   if (Employe_number.length !== 10) {
-      return alert("Enter valid 10 digit number")
+const handleButton = async () => {
+  if (!Employe_name || !Employe_age || !Employe_gender || !Employe_designation || !Employe_salary || !Employe_number) {
+    return alert("Fill all fields")
   }
 
-    const payload = {
-      Employe_name,
-      Employe_age,
-      Employe_gender,
-      Employe_designation,
-      Employe_salary,
-      Employe_number
-    }
+  if (Employe_number.length !== 10) {
+    return alert("Enter valid 10 digit number")
+  }
 
+  const payload = {
+    Employe_name,
+    Employe_age,
+    Employe_gender,
+    Employe_designation,
+    Employe_salary,
+    Employe_number
+  }
+
+  setLoading(true)
+
+  try {
     if (editId !== null) {
       await fetch(`${API_URL}/${editId}/`, {
         method: "PUT",
@@ -86,7 +95,13 @@ export default function EmployeePage() {
 
     clearForm()
     fetchDetails()
+
+  } catch (err) {
+    alert("⚠️ Server waking up... please wait and try again")
   }
+
+  setLoading(false)
+}
 
   const clearForm = () => {
     setEmployeName("")
@@ -261,9 +276,9 @@ export default function EmployeePage() {
     </div>
   </div>
   
-  <button onClick={handleButton} className="primary-btn">
-    {editId ? "💾 Update" : "➕ Add Employee"}
-  </button>
+<button onClick={handleButton} className="primary-btn" disabled={loading}>
+  {loading ? "⏳ Adding..." : editId ? "💾 Update" : "➕ Add Employee"}
+</button>
 </div>
 
         <div className="list-card">
