@@ -43,7 +43,7 @@ const fetchDetails = async () => {
     const data = await response.json()
     setDetails(data)
   } catch {
-    return alert("Server waking up...")
+    console.log("Server waking up...")
   }
 }
 
@@ -63,9 +63,17 @@ const handleButton = async () => {
     return alert("Fill all fields")
   }
 
-  if (Employe_number.length !== 10) {
-    return alert("Enter valid 10 digit number")
-  }
+if (!/^[89]\d{9}$/.test(Employe_number)) {
+  return alert("Phone number must start with 9 or 8 and be 10 digits")
+}
+
+if (!/^[1-9]\d{0,4}$/.test(Employe_salary)) {
+  return alert("Salary must be valid (1 - 10000, no leading zero)")
+}
+
+if (parseInt(Employe_salary) > 10000) {
+  return alert("Salary cannot exceed 10000")
+}
 
   const payload = {
     Employe_name,
@@ -123,10 +131,14 @@ const handleButton = async () => {
     setEditId(item.id)
   }
 
-  const deleteDetails = async (id: number) => {
+const deleteDetails = async (id: number) => {
+  try {
     await fetch(`${API_URL}/${id}/`, { method: "DELETE" })
     fetchDetails()
+  } catch {
+    alert("⚠️ Delete failed. Try again")
   }
+}
 
 
   const filteredEmployees = Details.filter((item) =>
@@ -244,19 +256,25 @@ const handleButton = async () => {
       <option value="Admin">Admin</option>
     </select>
     
-    <input
-      type="number"
-      placeholder="Salary (₹) *"
-      value={Employe_salary}
-      onChange={(e) => {
-        const value = e.target.value;
-        if (/^\d*$/.test(value)) {
-          setEmployeSalary(value);
-        }
-      }}
-      min="0"
-      required
-    />
+<input
+  type="text"
+  placeholder="Salary (₹) *"
+  value={Employe_salary}
+  onChange={(e) => {
+    let value = e.target.value.replace(/\D/g, "") // only numbers
+
+    
+    if (value.startsWith("0")) {
+      value = value.replace(/^0+/, "")
+    }
+
+    
+    if (parseInt(value || "0") > 10000) return
+
+    setEmployeSalary(value)
+  }}
+  required
+/>
     
     
     <div className="form-group full-width">
