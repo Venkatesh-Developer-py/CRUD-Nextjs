@@ -71,7 +71,7 @@ if (!/^[1-9]\d{0,4}$/.test(Employe_salary)) {
   return alert("Salary must be valid (1 - 10000, no leading zero)")
 }
 
-if (parseInt(Employe_salary) > 10000) {
+if (parseInt(Employe_salary) > 1000000000) {
   return alert("Salary cannot exceed 10000")
 }
 
