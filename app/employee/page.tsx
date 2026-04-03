@@ -67,12 +67,14 @@ if (!/^[89]\d{9}$/.test(Employe_number)) {
   return alert("Phone number must start with 9 or 8 and be 10 digits")
 }
 
-if (!/^[1-9]\d{0,4}$/.test(Employe_salary)) {
-  return alert("Salary must be valid (1 - 10000, no leading zero)")
+const cleanSalary = Employe_salary.replace(/,/g, "")
+
+if (!/^[1-9]\d*$/.test(cleanSalary)) {
+  return alert("Enter valid salary")
 }
 
-if (parseInt(Employe_salary) > 1000000000) {
-  return alert("Salary cannot exceed 10000")
+if (parseInt(cleanSalary) > 1000000000) {
+  return alert("Salary too large")
 }
 
   const payload = {
@@ -80,7 +82,7 @@ if (parseInt(Employe_salary) > 1000000000) {
     Employe_age,
     Employe_gender,
     Employe_designation,
-    Employe_salary,
+    Employe_salary: Employe_salary.replace(/,/g, ""),
     Employe_number
   }
 
@@ -261,17 +263,13 @@ const deleteDetails = async (id: number) => {
   placeholder="Salary (₹) *"
   value={Employe_salary}
   onChange={(e) => {
-    let value = e.target.value.replace(/\D/g, "") // only numbers
-
-    
+    let value = e.target.value.replace(/\D/g, "") // numbers only
     if (value.startsWith("0")) {
       value = value.replace(/^0+/, "")
     }
+    const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-    
-    if (parseInt(value || "0") > 10000) return
-
-    setEmployeSalary(value)
+    setEmployeSalary(formatted)
   }}
   required
 />
